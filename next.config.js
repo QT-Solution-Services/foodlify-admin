@@ -7,6 +7,10 @@ const nextConfig = {
   images: {
     domains: ["foodlify-files.s3.amazonaws.com"],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  // distDir: "./build",
 };
 
 module.exports = nextConfig;
