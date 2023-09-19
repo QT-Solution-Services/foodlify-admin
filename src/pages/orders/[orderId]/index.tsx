@@ -11,8 +11,14 @@ import useOrders from "@/hooks/useOrders";
 function Index() {
   const router = useRouter();
   const { showToast } = useContext(ToastContext);
-  const { approveOrder, reqLoading, orderSentForDelivery, orderDelivered } =
-    useOrders();
+  const {
+    approveOrder,
+    rejectOrder,
+    reqLoading,
+    rejLoading,
+    orderSentForDelivery,
+    orderDelivered,
+  } = useOrders();
   const [close, setClose] = useState(false);
   const [showLoader, setLoader] = useState(true);
   const {
@@ -35,9 +41,13 @@ function Index() {
     addressId,
   } = router.query;
 
-  function handleStatusButton(status: string) {
-    if (status === "PENDING") {
+  function handleStatusButton(status: string, action = "approve") {
+    if (status === "PENDING" && action === "approve") {
       approveOrder(`${orderId}`);
+    }
+    if (status === "PENDING" && action === "reject") {
+      alert("reject");
+      rejectOrder(`${orderId}`);
     }
     if (status === "APPROVED") {
       orderSentForDelivery(`${orderId}`);
@@ -71,23 +81,48 @@ function Index() {
     <AppLayout>
       <Modal onclose={close}>
         <div className=" w-[750px] bg-yellow-200/90  text-left shadow-sm">
-          <div className="flex flex-col justify-around  space-y-3 rounded-2xl bg-yellow-300/60 py-4 text-center font-semibold text-stone-700 md:flex-row md:space-y-0">
+          <div className="flex flex-col justify-around  space-y-3 rounded-2xl bg-yellow-300/60 py-4 pt-4 text-center font-semibold text-stone-700 md:flex-row md:space-y-0 md:pt-2">
             <h3 className="">Ordr id: {orderId}</h3>
             <h3>
               status: {status}
               <span>
-                <Button
-                  type="small"
-                  loading={reqLoading}
-                  onClick={() => handleStatusButton(`${status}`)}
-                  bgc="bg-green-100"
-                  className="ml-2 hover:bg-green-200"
-                >
-                  {status === "PENDING" && "👍️click to approve order💯️"}
-                  {status === "APPROVED" && "🙂️click to sent for delivery🚀️"}
-                  {status === "SENT_FOR_DELIVERY" && "🤠️click if delivered📝️"}
-                  {status === "DELIVERED" && "🙂️Already Delivered✅️"}
-                </Button>
+                {status === "PENDING" ? (
+                  <div className="flex justify-center gap-2">
+                    <Button
+                      type="small"
+                      loading={reqLoading}
+                      onClick={() => handleStatusButton(`${status}`)}
+                      bgc="bg-green-100"
+                      className="ml-2 hover:bg-green-200"
+                    >
+                      approve
+                    </Button>
+                    or
+                    <Button
+                      type="small"
+                      loading={rejLoading}
+                      onClick={() => handleStatusButton(`${status}`, "reject")}
+                      bgc="bg-red-400"
+                      className="ml-2 hover:bg-red-500"
+                    >
+                      reject
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    type="small"
+                    loading={reqLoading}
+                    onClick={() => handleStatusButton(`${status}`, "d")}
+                    bgc="bg-green-100"
+                    className="ml-2 hover:bg-green-200"
+                  >
+                    {status === "APPROVED" &&
+                      "🙂️click to sent for delivery🚀️"}
+                    {status === "SENT_FOR_DELIVERY" &&
+                      "🤠️click if delivered📝️"}
+                    {status === "DELIVERED" && "🙂️Already Delivered✅️"}
+                  </Button>
+                )}
               </span>
             </h3>
             <Button

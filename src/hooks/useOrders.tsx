@@ -15,6 +15,7 @@ export default function useOrders() {
   const { showToast } = useContext(ToastContext);
   const { get, put, patch } = useSecureRequest();
   const [reqLoading, setReqLoading] = useState(false);
+  const [rejLoading, setRejLoading] = useState(false);
 
   const fetchOrders = async () => {
     try {
@@ -43,6 +44,21 @@ export default function useOrders() {
       throw error;
     } finally {
       setReqLoading(false);
+    }
+  };
+
+  const rejectOrder = async (orderId: string) => {
+    try {
+      setRejLoading(true);
+      const res = await put({ data: orderId, url: approveOrderRoute(orderId) });
+      if (res.success) {
+        showToast("success", res.message);
+        router.push("/orders");
+      }
+    } catch (error) {
+      throw error;
+    } finally {
+      setRejLoading(false);
     }
   };
 
@@ -85,6 +101,8 @@ export default function useOrders() {
   return {
     fetchOrders,
     reqLoading,
+    rejLoading,
+    rejectOrder,
     approveOrder,
     orderSentForDelivery,
     orderDelivered,
