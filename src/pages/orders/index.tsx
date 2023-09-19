@@ -21,14 +21,14 @@ function Index() {
     orders.length > 0 ? orders.map((order) => formatOrdersData(order)) : [];
   return (
     <AppLayout pageTitle="All Orders">
-      <ul className="mb-20 grid grid-cols-3  gap-4">
+      <ul className="mb-20 grid grid-cols-1 gap-4  md:grid-cols-3">
         {loading ? (
           <>
             {[...Array(8)].map((_, idx) => {
               return (
                 <div
                   key={idx}
-                  className="h-36 animate-pulse rounded-md bg-yellow-400/20 p-12"
+                  className="h-1 animate-pulse rounded-md bg-yellow-400/20 p-12 md:h-36"
                 ></div>
               );
             })}

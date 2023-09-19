@@ -8,7 +8,7 @@ import useLogout from "@/hooks/useLogout";
 function Sidebar() {
   const { handleLogout } = useLogout();
   return (
-    <div className="w-[350px] border-r-2 border-stone-200 bg-stone-50/50 px-14 py-12">
+    <div className="hidden w-[350px] border-r-2 border-stone-200 bg-stone-50/50 px-14 py-12 md:block">
       <>
         <Image
           src="/logo.svg"

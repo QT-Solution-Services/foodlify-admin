@@ -71,7 +71,7 @@ function Index() {
     <AppLayout>
       <Modal onclose={close}>
         <div className=" w-[750px] bg-yellow-200/90  text-left shadow-sm">
-          <div className="flex justify-around rounded-2xl bg-yellow-300/60 py-4 font-semibold text-stone-700">
+          <div className="flex flex-col justify-around  space-y-3 rounded-2xl bg-yellow-300/60 py-4 text-center font-semibold text-stone-700 md:flex-row md:space-y-0">
             <h3 className="">Ordr id: {orderId}</h3>
             <h3>
               status: {status}
@@ -105,11 +105,11 @@ function Index() {
             </div>
           ) : (
             <div className="flex flex-col gap-6 px-6  py-4">
-              <div className="flex justify-between rounded-xl bg-blue-50 p-4 font-light text-stone-600">
+              <div className="flex flex-col justify-between rounded-xl bg-blue-50 p-4 font-light text-stone-600 md:flex-row">
                 <p>This order was made at &nbsp; {formatDate(orderTime)} ,</p>
                 <p>Delivery Type: {deliveryType}</p>
               </div>
-              <div className="flex flex-wrap justify-between gap-4 ">
+              <div className="mb-16 flex flex-wrap justify-between gap-4 md:mb-2">
                 {/* delivery details */}
                 <div className="flex flex-col">
                   <h3 className="text-sm font-semibold uppercase text-stone-700">

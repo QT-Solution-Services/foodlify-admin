@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "@/components/Button";
+import Image from "next/image";
 import useAuthentication from "@/hooks/useAuthentication";
 import SplashScreen from "@/components/SplashScreen";
 
@@ -30,25 +31,34 @@ function Index() {
       {!showSplash && (
         <div className="h-screen bg-yellow-100">
           <header className="flex h-14 items-center justify-between bg-yellow-400 px-8 py-2 ">
-            <h2 className="text-2xl capitalize">foodlify admin app</h2>
+            <h2 className="text-sm capitalize md:text-2xl">
+              foodlify admin app
+            </h2>
             <h2>
               <input
                 type="text"
                 name=""
                 placeholder="oder #id"
-                className="input  w-40 transition-all  duration-300 focus:w-60 "
+                className="input hidden w-40 transition-all duration-300  focus:w-60 md:block "
+              />
+              <Image
+                src="/hamburger.svg"
+                width={50}
+                height={50}
+                alt="hamburger-icon"
+                className="block md:hidden"
               />
             </h2>
           </header>
-          <main className="mx-auto my-16  w-[900px] ">
-            <div className="rounded-2xl bg-yellow-200/60 px-20 py-16 text-center">
-              <h2 className="text-5xl font-semibold">
+          <main className="mx-auto my-16  md:w-[900px] ">
+            <div className="rounded-2xl bg-yellow-200/60 px-12 py-8 md:px-20 md:py-16 md:text-center">
+              <h2 className="text-2xl font-light md:text-5xl md:font-semibold">
                 Foodlify admin dashbord
               </h2>
-              <h3 className="font-medium italic text-yellow-600">
+              <h3 className="text-center text-sm font-medium italic text-yellow-600">
                 Elevating Culinary Management...
               </h3>
-              <h3 className="mb-4 mt-8 text-xl text-stone-700">
+              <h3 className="mb-4 mt-8 text-stone-700 md:text-xl">
                 👋️ welcome back, please start by filling the form
               </h3>
               {/* form */}

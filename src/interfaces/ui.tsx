@@ -26,3 +26,9 @@ export interface LoginFormProps {
   username: string;
   password: string;
 }
+
+export interface NavItemProps {
+  to: string;
+  imgsrc: string;
+  children: React.ReactNode;
+}

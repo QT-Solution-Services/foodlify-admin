@@ -7,7 +7,7 @@ import React from "react";
 function Dashboard() {
   return (
     <AppLayout pageTitle="Dashboard">
-      <ul className="grid grid-cols-3 gap-6">
+      <ul className="mb-20 grid grid-cols-1 gap-6 md:grid-cols-3">
         <DashbaorbItem />
       </ul>
     </AppLayout>
