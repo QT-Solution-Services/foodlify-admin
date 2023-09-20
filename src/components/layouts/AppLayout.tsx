@@ -17,20 +17,20 @@ function AppLayout({ children, pageTitle }: AppLayoutProps) {
   const { handleLogout } = useLogout();
   const { ping } = useAuthentication();
 
-  // useEffect(() => {
-  //   if (userData === null && typeof window !== "undefined") {
-  //     handleLogout();
-  //   }
-  //   const checkSession = async () => {
-  //     // trying to validate token from server
-  //     const pingRes = await ping();
-  //     if (pingRes === false) {
-  //       handleLogout();
-  //       // showToast("error", "Your session has expired. Please log in again.");
-  //     }
-  //   };
-  //   checkSession();
-  // }, []);
+  useEffect(() => {
+    if (userData === null && typeof window !== "undefined") {
+      handleLogout();
+    }
+    const checkSession = async () => {
+      // trying to validate token from server
+      const pingRes = await ping();
+      if (pingRes === false) {
+        handleLogout();
+        // showToast("error", "Your session has expired. Please log in again.");
+      }
+    };
+    checkSession();
+  }, []);
 
   return (
     <div className="flex h-full ">
