@@ -15,9 +15,15 @@ function ResturantItem({
   number,
 }: any) {
   return (
-    <li className=" flex gap-4 py-4">
+    <li className={`flex gap-4 py-4 ${status === "CLOSED" ? "grayscale" : ""}`}>
       <div className="max-w-fit  rounded-xl border-2 border-stone-300 p-2">
-        <Image src={logo} alt="logo" height={80} width={80} />
+        <Image
+          src={logo}
+          alt="logo"
+          height={80}
+          width={80}
+          className="h-full"
+        />
       </div>
       <div className="flex flex-grow justify-between">
         <div className="flex flex-col">

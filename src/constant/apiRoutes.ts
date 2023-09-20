@@ -12,3 +12,6 @@ export const sentForDeliveryRoute = (orderId: string) =>
 
 export const orderDeliveredRoute = (orderId: string) =>
   `${baseUrl}/api/v1/admin/order_delivered/${orderId}`;
+
+export const rejetOrderRoute = (orderId: string) =>
+  `${baseUrl}/api/v1/admin/reject_order/${orderId}`;

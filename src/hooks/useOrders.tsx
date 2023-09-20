@@ -5,6 +5,7 @@ import useSecureRequest from "./useRequest";
 import {
   ordersRoute,
   approveOrderRoute,
+  rejetOrderRoute,
   sentForDeliveryRoute,
   orderDeliveredRoute,
 } from "@/constant/apiRoutes";
@@ -50,7 +51,7 @@ export default function useOrders() {
   const rejectOrder = async (orderId: string) => {
     try {
       setRejLoading(true);
-      const res = await put({ data: orderId, url: approveOrderRoute(orderId) });
+      const res = await put({ data: orderId, url: rejetOrderRoute(orderId) });
       if (res.success) {
         showToast("success", res.message);
         router.push("/orders");

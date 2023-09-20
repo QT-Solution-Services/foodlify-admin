@@ -46,7 +46,6 @@ function Index() {
       approveOrder(`${orderId}`);
     }
     if (status === "PENDING" && action === "reject") {
-      alert("reject");
       rejectOrder(`${orderId}`);
     }
     if (status === "APPROVED") {
@@ -81,7 +80,7 @@ function Index() {
     <AppLayout>
       <Modal onclose={close}>
         <div className=" w-[750px] bg-yellow-200/90  text-left shadow-sm">
-          <div className="flex flex-col justify-around  space-y-3 rounded-2xl bg-yellow-300/60 py-4 pt-4 text-center font-semibold text-stone-700 md:flex-row md:space-y-0 md:pt-2">
+          <div className="mt-2.5 flex flex-col justify-around  space-y-3 rounded-2xl bg-yellow-300/60 py-4 pt-4 text-center font-semibold text-stone-700 md:flex-row md:space-y-0 md:pt-2">
             <h3 className="">Ordr id: {orderId}</h3>
             <h3>
               status: {status}
