@@ -11,10 +11,12 @@ export interface ButtonProps {
 export interface AppLayoutProps {
   children: React.ReactNode;
   pageTitle?: string;
+  SeachType?: React.ReactNode;
 }
 
 export interface AppNavProps {
   pageTitle?: string;
+  SeachType?: React.ReactNode;
 }
 
 export interface SideLinkProps {

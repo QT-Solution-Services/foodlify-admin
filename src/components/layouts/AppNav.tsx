@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Button from "../Button";
 import useLogout from "@/hooks/useLogout";
 
-function AppNav({ pageTitle = "default title" }: AppNavProps) {
+function AppNav({ pageTitle = "default title", SeachType }: AppNavProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -12,12 +12,7 @@ function AppNav({ pageTitle = "default title" }: AppNavProps) {
       <h2 className="min-w rounded-full bg-yellow-100 px-6 text-lg font-medium capitalize  text-yellow-800">
         {pageTitle}
       </h2>
-      <input
-        type="text"
-        name=""
-        placeholder="oder #id"
-        className="input hidden w-40 transition-all duration-300  focus:w-60 md:block "
-      />
+      {SeachType}
 
       <Image
         src="/hamburger.svg"

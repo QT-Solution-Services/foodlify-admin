@@ -10,7 +10,7 @@ import useLogout from "@/hooks/useLogout";
 import useAuthentication from "@/hooks/useAuthentication";
 import BottomNav from "./BottomNav";
 
-function AppLayout({ children, pageTitle }: AppLayoutProps) {
+function AppLayout({ children, pageTitle, SeachType }: AppLayoutProps) {
   const router = useRouter();
   const { showToast } = useContext(ToastContext);
   const { userData } = useContext(AuthContext);
@@ -36,7 +36,7 @@ function AppLayout({ children, pageTitle }: AppLayoutProps) {
     <div className="flex h-full ">
       <Sidebar />
       <div className="flex grow flex-col">
-        <AppNav pageTitle={pageTitle} />
+        <AppNav pageTitle={pageTitle} SeachType={SeachType} />
         <main className="h-full bg-stone-50 px-4 pt-6 md:px-16 md:pt-12">
           {children}
         </main>

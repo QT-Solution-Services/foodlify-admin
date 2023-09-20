@@ -33,14 +33,13 @@ function Index() {
 
   const formatedOrders =
     orders.length > 0 ? orders.map((order) => formatOrdersData(order)) : [];
-
   const filteredOrders = formatedOrders.filter((order: any) =>
     filter === "all" ? true : order.status === filterOptions[filter],
   );
-
   const orderCount = filteredOrders.length;
+
   return (
-    <AppLayout pageTitle="All Orders">
+    <AppLayout pageTitle="All Orders" SeachType={<SearchOrder hidden={true} />}>
       <div className="flex justify-between">
         <select
           value={filter}
@@ -84,3 +83,25 @@ function Index() {
 }
 
 export default Index;
+
+function SearchOrder({ hidden }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  function handleSearch(e) {
+    e.preventDefault();
+    console.log(searchQuery);
+    setSearchQuery("");
+  }
+  return (
+    <div className={`${hidden ? "hidden" : "block"}`}>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="oder #id"
+          className="input hidden w-40 transition-all duration-300  focus:w-60 md:block "
+        />
+      </form>
+    </div>
+  );
+}
