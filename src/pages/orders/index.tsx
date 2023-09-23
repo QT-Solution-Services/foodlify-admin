@@ -9,6 +9,9 @@ function Index() {
   const { reqLoading: loading, fetchOrders } = useOrders();
   const [orders, setOrders] = useState([]);
   const [filter, setFilter] = useState("all");
+  const [filterById, setFilterById] = useState([]);
+  const [showSearchById, setShowSearchById] = useState(false);
+
   const [count, setcount] = useState(0);
 
   useEffect(function () {
@@ -37,9 +40,16 @@ function Index() {
     filter === "all" ? true : order.status === filterOptions[filter],
   );
   const orderCount = filteredOrders.length;
+  console.log(showSearchById);
 
   return (
-    <AppLayout pageTitle="All Orders" SeachType={<SearchOrder hidden={true} />}>
+    <AppLayout pageTitle="All Orders">
+      <SearchOrder
+        hidden={false}
+        filteredOrders={filteredOrders}
+        setFilterById={setFilterById}
+        setShowSearchById={setShowSearchById}
+      />
       <div className="flex justify-between">
         <select
           value={filter}
@@ -71,9 +81,18 @@ function Index() {
           </>
         ) : (
           <>
-            {filteredOrders.map((order, idx) => (
-              <OrderItem {...order} key={idx} />
-            ))}
+            {/* {!showSearchById &&
+              filteredOrders.map((order, idx) => (
+                <OrderItem {...order} key={idx} />
+              ))} */}
+
+            {showSearchById
+              ? filterById.map((order, idx) => (
+                  <OrderItem {...order} key={idx} />
+                ))
+              : filteredOrders.map((order, idx) => (
+                  <OrderItem {...order} key={idx} />
+                ))}
           </>
         )}
       </ul>
@@ -83,14 +102,28 @@ function Index() {
 }
 
 export default Index;
-
-function SearchOrder({ hidden }) {
+function SearchOrder({
+  hidden,
+  filteredOrders,
+  setFilterById,
+  setShowSearchById,
+}) {
   const [searchQuery, setSearchQuery] = useState("");
+  if (searchQuery.length < 5) setShowSearchById(false);
+
   function handleSearch(e) {
     e.preventDefault();
-    console.log(searchQuery);
-    setSearchQuery("");
+    // Create a new filtered array instead of modifying the original one
+    const newFilteredOrders = filteredOrders.filter(
+      (order: any) => order.orderId === searchQuery,
+    );
+    setShowSearchById(true);
+
+    // Update the state with the new filtered array
+    setFilterById(newFilteredOrders);
+    console.log(newFilteredOrders);
   }
+
   return (
     <div className={`${hidden ? "hidden" : "block"}`}>
       <form onSubmit={handleSearch}>
@@ -98,8 +131,8 @@ function SearchOrder({ hidden }) {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="oder #id"
-          className="input hidden w-40 transition-all duration-300  focus:w-60 md:block "
+          placeholder="search by order id"
+          className="input  mb-6 w-80 transition-all duration-300 focus:w-60"
         />
       </form>
     </div>
