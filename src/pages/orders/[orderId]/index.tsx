@@ -24,7 +24,7 @@ function Index() {
   const {
     orderId,
     status,
-    foodId,
+    itemId,
     restaurant,
     title,
     price,
@@ -36,6 +36,7 @@ function Index() {
     email,
     orderTime,
     deliveryType,
+    itemCount,
     description,
     category,
     addressId,
@@ -166,7 +167,8 @@ function Index() {
 
                   <ul className="my-2 space-y-1 font-medium text-stone-600">
                     <li>{restaurant}</li>
-                    <li>#id {foodId}</li>
+                    <li>#id {itemId}</li>
+                    <li>count: {itemCount}</li>
                     <li>{category}</li>
                     <li>{title}</li>
                     {/* <li>{description}</li> */}

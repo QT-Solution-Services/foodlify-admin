@@ -7,7 +7,7 @@ function OrderItem({
   status,
   orderId,
   image,
-  foodId,
+  itemId,
   description,
   category,
   addressId,
@@ -20,6 +20,7 @@ function OrderItem({
   fName,
   lName,
   email,
+  itemCount,
   orderTime,
   deliveryType,
 }: any) {
@@ -29,7 +30,8 @@ function OrderItem({
       pathname: `/orders/${orderId}`,
       query: {
         status,
-        foodId,
+        itemId,
+        itemCount,
         restaurant,
         title,
         price,

@@ -32,24 +32,25 @@ export function formatResturantData(data: any) {
 
 export function formatOrdersData(order: any) {
   const {
-    food,
+    items,
     delivery_address,
     status,
     user,
+    item_count: itemCount,
     order_at: orderTime,
     order_id: orderId,
     delivery_type: deliveryType,
   } = order;
 
   const {
-    food_id: foodId,
+    item_id: itemId,
     restaurant,
     title,
     price,
     image,
     description,
     category,
-  } = food;
+  } = items[0];
 
   const {
     address,
@@ -61,7 +62,7 @@ export function formatOrdersData(order: any) {
   const { first_name: fName, last_name: lName, email } = user;
 
   const formatedOrder = {
-    foodId,
+    itemId,
     restaurant,
     title,
     price,
@@ -75,6 +76,7 @@ export function formatOrdersData(order: any) {
     fName,
     lName,
     email,
+    itemCount,
     orderId,
     addressId,
     orderTime,
