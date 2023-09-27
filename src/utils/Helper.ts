@@ -32,10 +32,10 @@ export function formatResturantData(data: any) {
 
 export function formatOrdersData(order: any) {
   const {
-    items,
     delivery_address,
     status,
     user,
+    restaurant,
     item_count: itemCount,
     order_at: orderTime,
     order_id: orderId,
@@ -43,17 +43,24 @@ export function formatOrdersData(order: any) {
   } = order;
 
   const {
-    item_id: itemId,
-    restaurant,
-    title,
-    price,
-    image,
-    description,
-    category,
-  } = items[0];
+    name: restaurantName,
+    address: restaurantAddress,
+    logo,
+    restaurant_id: restaurantId,
+  } = restaurant;
+
+  // const {
+  //   item_id: itemId,
+  //   restaurant,
+  //   title,
+  //   price,
+  //   image,
+  //   description,
+  //   category,
+  // } = items[0];
 
   const {
-    address,
+    address: deliveryAddress,
     address_id: addressId,
     contact_name: cName,
     phone_number: cNumber,
@@ -62,16 +69,13 @@ export function formatOrdersData(order: any) {
   const { first_name: fName, last_name: lName, email } = user;
 
   const formatedOrder = {
-    itemId,
-    restaurant,
-    title,
-    price,
-    image,
-    address,
+    restaurantName,
+    restaurantAddress,
+    logo,
+    restaurantId,
+    deliveryAddress,
     cName,
     cNumber,
-    description,
-    category,
     status,
     fName,
     lName,

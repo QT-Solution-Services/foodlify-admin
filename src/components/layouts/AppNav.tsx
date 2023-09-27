@@ -32,7 +32,6 @@ function AppNav({ pageTitle = "default title", SeachType }: AppNavProps) {
 export default AppNav;
 
 function MoblieSidebar({ isOpen }) {
-  const { handleLogout } = useLogout();
   return (
     <div
       className={`fixed inset-y-0 left-0 z-20 w-48 transform bg-white shadow-lg transition-transform duration-300 ${
@@ -50,7 +49,6 @@ function MoblieSidebar({ isOpen }) {
         <Button
           type="medium"
           bgc="bg-red-300"
-          onClick={handleLogout}
           className="mt-4 w-full hover:bg-red-400"
         >
           Logout

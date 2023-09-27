@@ -18,16 +18,19 @@ function Index() {
     rejLoading,
     orderSentForDelivery,
     orderDelivered,
+    fetchSingleOrders,
   } = useOrders();
   const [close, setClose] = useState(false);
   const [showLoader, setLoader] = useState(true);
+  const [order, setOrder] = useState([]);
+  const currentPath = router.asPath;
+  const splitedPath = currentPath.split("/");
+  const extractedIdfromPath = splitedPath[2].split("?")[0];
+
   const {
     orderId,
     status,
     itemId,
-    restaurant,
-    title,
-    price,
     address,
     cName,
     cNumber,
@@ -37,7 +40,6 @@ function Index() {
     orderTime,
     deliveryType,
     itemCount,
-    description,
     category,
     addressId,
   } = router.query;
@@ -61,15 +63,24 @@ function Index() {
   }
 
   useEffect(() => {
+    async function getSingleOrder() {
+      const orderData = await fetchSingleOrders(extractedIdfromPath);
+      setOrder(orderData);
+    }
+    getSingleOrder();
+  }, [extractedIdfromPath]);
+  console.log(order);
+
+  useEffect(() => {
     const timerId = setTimeout(() => {
       setLoader(false);
-    }, 3000);
+    }, 2000);
     const warningTimerId = setTimeout(() => {
       showToast(
         "warn",
         "Please be aware that actions cannot be undone once triggered.",
       );
-    }, 6000);
+    }, 7000);
 
     return () => {
       clearInterval(timerId);
@@ -166,13 +177,12 @@ function Index() {
                   </h3>
 
                   <ul className="my-2 space-y-1 font-medium text-stone-600">
-                    <li>{restaurant}</li>
+                    {/* <li>{restaurant}</li>
                     <li>#id {itemId}</li>
-                    <li>count: {itemCount}</li>
                     <li>{category}</li>
                     <li>{title}</li>
-                    {/* <li>{description}</li> */}
-                    <li>{price}</li>
+                    <li>{description}</li>
+                    <li>{price}</li> */}
                   </ul>
                 </div>
                 {/* user details */}

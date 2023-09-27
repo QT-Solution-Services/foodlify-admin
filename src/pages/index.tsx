@@ -16,8 +16,10 @@ function Index() {
     return () => clearTimeout(timerId);
   }, []);
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("admin@foodlify.com.ng");
+  const [password, setPassword] = useState("TheAdmin@foodlify");
 
   async function handleSubmit(e: any) {
     e.preventDefault();

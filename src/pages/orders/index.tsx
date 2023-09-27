@@ -40,7 +40,7 @@ function Index() {
     filter === "all" ? true : order.status === filterOptions[filter],
   );
   const orderCount = filteredOrders.length;
-  console.log(orders);
+  console.log(formatedOrders);
 
   return (
     <AppLayout pageTitle="All Orders">

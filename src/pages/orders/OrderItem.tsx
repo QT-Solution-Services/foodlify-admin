@@ -6,15 +6,8 @@ import React from "react";
 function OrderItem({
   status,
   orderId,
-  image,
-  itemId,
-  description,
-  category,
   addressId,
-  restaurant,
-  title,
-  price,
-  address,
+  deliveryAddress,
   cName,
   cNumber,
   fName,
@@ -23,26 +16,23 @@ function OrderItem({
   itemCount,
   orderTime,
   deliveryType,
+  logo,
+  restaurantName,
 }: any) {
   const router = useRouter();
   function handleViewDetail() {
     router.push({
       pathname: `/orders/${orderId}`,
       query: {
+        orderId,
         status,
-        itemId,
         itemCount,
-        restaurant,
-        title,
-        price,
-        address,
+        deliveryAddress,
         cName,
         cNumber,
         fName,
         lName,
         email,
-        category,
-        description,
         orderTime,
         deliveryType,
         addressId,
@@ -55,17 +45,24 @@ function OrderItem({
         <div className="flex flex-grow flex-col items-center">
           <>
             <Image
-              src={image}
+              src={logo}
               width={100}
               height={100}
               alt="foodIcon"
               className="mb-2 rounded-full bg-slate-200 p-2"
             />
             <h3 className="text-stone-600">
+              <span className="font-medium">{restaurantName}</span>
+            </h3>
+            <h3 className="text-stone-600">
               OrderId: <span className="font-medium">{orderId}</span>
             </h3>
             <h3 className="text-stone-600">
               Status: <span className="text-sm font-medium">{status}</span>
+            </h3>
+            <h3 className="text-stone-600">
+              item count:
+              <span className="text-sm font-medium">{itemCount}</span>
             </h3>
           </>
           <Button

@@ -8,6 +8,7 @@ import {
   rejetOrderRoute,
   sentForDeliveryRoute,
   orderDeliveredRoute,
+  singleOrderRoute,
 } from "@/constant/apiRoutes";
 import { Router, useRouter } from "next/router";
 
@@ -27,6 +28,21 @@ export default function useOrders() {
       }
     } catch (error) {
       showToast("error", "Error while fetching order");
+      throw error;
+    } finally {
+      setReqLoading(false);
+    }
+  };
+
+  const fetchSingleOrders = async (orderId: string) => {
+    try {
+      setReqLoading(true);
+      const res = await get({ url: singleOrderRoute(orderId) });
+      if (res.success) {
+        return res.data;
+      }
+    } catch (error) {
+      showToast("error", "Error while fetching single order");
       throw error;
     } finally {
       setReqLoading(false);
@@ -101,6 +117,7 @@ export default function useOrders() {
 
   return {
     fetchOrders,
+    fetchSingleOrders,
     reqLoading,
     rejLoading,
     rejectOrder,
