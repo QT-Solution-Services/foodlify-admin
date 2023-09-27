@@ -41,7 +41,7 @@ function Index() {
     orderTime,
     deliveryType,
     itemCount,
-    category,
+    deliveryAddress,
     addressId,
   } = router.query;
 
@@ -165,8 +165,8 @@ function Index() {
                     <div className="h-2 rounded-xl border-2 border-yellow-400 bg-yellow-300"></div>
                   </h3>
                   <ul className="my-2 space-y-1 font-medium text-stone-600">
-                    <li>{address}</li>
-                    <li>#id {addressId}</li>
+                    <li>{deliveryAddress}</li>
+                    {/* <li>#id {addressId}</li> */}
                     <li>contact name: {cName}</li>
                     <li>{cNumber}</li>
                   </ul>
