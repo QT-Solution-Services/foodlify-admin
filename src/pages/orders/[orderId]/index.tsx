@@ -4,6 +4,7 @@ import Modal from "@/components/Modal";
 import AppLayout from "@/components/layouts/AppLayout";
 import { useRouter } from "next/router";
 import { formatDate } from "@/utils/Helper";
+import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 import { ToastContext } from "@/contexts/ToastContext";
 import useOrders from "@/hooks/useOrders";
@@ -22,7 +23,7 @@ function Index() {
   } = useOrders();
   const [close, setClose] = useState(false);
   const [showLoader, setLoader] = useState(true);
-  const [order, setOrder] = useState([]);
+  const [items, setItems] = useState([]);
   const currentPath = router.asPath;
   const splitedPath = currentPath.split("/");
   const extractedIdfromPath = splitedPath[2].split("?")[0];
@@ -64,12 +65,13 @@ function Index() {
 
   useEffect(() => {
     async function getSingleOrder() {
-      const orderData = await fetchSingleOrders(extractedIdfromPath);
-      setOrder(orderData);
+      const itemList = await fetchSingleOrders(extractedIdfromPath);
+      const { body: orderList, message } = itemList || { body: [] };
+      setItems(orderList);
     }
     getSingleOrder();
   }, [extractedIdfromPath]);
-  console.log(order);
+  console.log(items);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -91,7 +93,7 @@ function Index() {
   return (
     <AppLayout>
       <Modal onclose={close}>
-        <div className=" w-[750px] bg-yellow-200/90  text-left shadow-sm">
+        <div className="mt-[10rem]  max-h-[700px] w-[750px] overflow-y-auto bg-yellow-200/90  pb-4 text-left shadow-sm">
           <div className="mt-2.5 flex flex-col justify-around  space-y-3 rounded-2xl bg-yellow-300/60 py-4 pt-4 text-center font-semibold text-stone-700 md:flex-row md:space-y-0 md:pt-2">
             <h3 className="">Ordr id: {orderId}</h3>
             <h3>
@@ -169,22 +171,6 @@ function Index() {
                     <li>{cNumber}</li>
                   </ul>
                 </div>
-                {/* food details */}
-                <div className="flex flex-col">
-                  <h3 className="text-sm font-semibold uppercase text-stone-700">
-                    Food Details
-                    <div className="h-2 rounded-xl border-2 border-yellow-400 bg-yellow-300"></div>
-                  </h3>
-
-                  <ul className="my-2 space-y-1 font-medium text-stone-600">
-                    {/* <li>{restaurant}</li>
-                    <li>#id {itemId}</li>
-                    <li>{category}</li>
-                    <li>{title}</li>
-                    <li>{description}</li>
-                    <li>{price}</li> */}
-                  </ul>
-                </div>
                 {/* user details */}
                 <div className="flex flex-col">
                   <h3 className="text-sm font-semibold uppercase text-stone-700">
@@ -196,6 +182,38 @@ function Index() {
                     <li>{lName}</li>
                     <li>{email}</li>
                   </ul>
+                </div>
+                {/* food details */}
+                <div className="flex flex-col">
+                  <h3 className="text-sm font-semibold uppercase text-stone-700">
+                    Food Details
+                    <div className="h-2 rounded-xl border-2 border-yellow-400 bg-yellow-300"></div>
+                  </h3>
+
+                  {items.map((item: any, idx) => {
+                    return (
+                      <div
+                        className="my-2 flex w-full justify-between gap-4"
+                        key={idx}
+                      >
+                        <ul className="my-2 space-y-1 font-medium text-stone-600">
+                          <li>{item.restaurant}</li>
+                          <li>#id {item.item_id}</li>
+                          <li>{item.category}</li>
+                          <li>{item.title}</li>
+                          <li>{item.description}</li>
+                          <li>{item.price}</li>
+                        </ul>
+                        <Image
+                          src={item.image}
+                          alt="item image"
+                          width={200}
+                          height={100}
+                          className="max-h-[200px] max-w-[200px] rounded-2xl"
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

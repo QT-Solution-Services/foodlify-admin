@@ -17,4 +17,4 @@ export const rejetOrderRoute = (orderId: string) =>
   `${baseUrl}/api/v1/admin/reject_order/${orderId}`;
 
 export const singleOrderRoute = (orderId: string) =>
-  `${baseUrl}/api/v1/admin/${orderId}`;
+  `${baseUrl}/api/v1/admin/order_by_id?order_id=${orderId}`;
